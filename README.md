@@ -58,7 +58,7 @@ The major dependencies include:
 3. Enter the project directory and activate your virtual environment:
    ```bash
    cd InternshipTask
-   source venv/bin/activate  # On Mac/Linux
+   source venv/bin/activate #on mac
    ```
 
 5. Install dependencies:
