@@ -15,5 +15,5 @@ This Streamlit dashboard is designed to help investors analyze the financial hea
 To run this project locally, you need to have Python installed on your machine (Python 3.8+ recommended). Follow these steps:
 
 1. Clone the repository:
-   ```bash
+   https://github.com/shiven06/InternshipTask.git```bash
   
