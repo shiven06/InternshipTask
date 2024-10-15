@@ -51,21 +51,25 @@ The major dependencies include:
 ### How to Run
 
 1. Clone the repository:
+   ```bash
    git clone https://github.com/shiven06/InternshipTask.git
-   
+   ```
 
-2. Enter the project directory and activate your virtual environment:
+3. Enter the project directory and activate your virtual environment:
+   ```bash
    cd InternshipTask
    source venv/bin/activate  # On Mac/Linux
-   
+   ```
 
-3. Install dependencies:
+5. Install dependencies:
+   ```bash
    pip install -r requirements.txt
-   
+   ```
 
-4. Run the Streamlit app:
+7. Run the Streamlit app:
+   ```bash
    streamlit run Ambit_IE_Internship_Task.py
-   
+   ```
 
 ### Challenges Faced
 
