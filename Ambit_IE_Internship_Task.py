@@ -15,13 +15,6 @@ def download_and_parse(url):
     soup = BeautifulSoup(response.content, 'html.parser')
     return soup
 
-# to find 'EPS in Rs'
-def find_specific_eps(df, date):
-    eps_row = df[df['Metric'].str.contains('EPS')]
-    if not eps_row.empty and date in eps_row.columns:
-        return eps_row[date].values[0]
-    return None
-
 # function to pivot and prepare dataframe for display
 def prepare_growth_display(df, metric_prefix):
     # filter dataframe for relevant metrics
@@ -106,25 +99,13 @@ def find_metric(parsed, html_tag, attribute_type, attribute_value):
     metric_tag = parsed.find(html_tag, {attribute_type: attribute_value})
     return metric_tag.text.strip() if metric_tag else 'Data not available'
 
-# function to find EPS value by identifying the correct table and row
-def find_eps_value(parsed_html):
-    # locate the table with id 'profit-loss' and class 'data-table responsive-text-nowrap'
-    profit_loss_section = parsed_html.find('section', {'id': 'profit-loss'})
-    if not profit_loss_section:
-        return 'Table not found'
 
-    table = profit_loss_section.find('table', class_='data-table responsive-text-nowrap')
-    if not table:
-        return 'EPS table not found'
-    
-    rows = table.find_all('tr')
-    for row in rows:
-        if 'EPS in Rs' in row.text:
-            tds = row.find_all('td')
-            if tds:
-                return tds[-2].text.strip()  # eeturn the second-last EPS value (i.e., 40.79)
-    return 'EPS value not found'
-
+# to find 'EPS in Rs'
+def find_specific_eps(df, date):
+    eps_row = df[df['Metric'].str.contains('EPS')]
+    if not eps_row.empty and date in eps_row.columns:
+        return eps_row[date].values[0]
+    return None
 
 def plot_growth_chart(df, title):
     # ensure periods are in the desired order
