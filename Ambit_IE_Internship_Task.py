@@ -22,7 +22,6 @@ def prepare_growth_display(df, metric_prefix):
     # pivot dataframe to get periods as columns
     growth_df = growth_df.pivot(index='Metric', columns='Period', values='Value').reset_index()
     # clean up the dataframe for better display
-    growth_df.columns.name = None  # remove the multi-index in columns
     growth_df.set_index('Metric', inplace=True)  # set 'Metric' as the new index
     return growth_df
 
