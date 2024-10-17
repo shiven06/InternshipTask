@@ -39,20 +39,6 @@ def find_specific_roce(df, metric_name):
         return f"Error fetching data: {str(e)}"
     return "Data not available"
 
-def get_ratios(parsed):
-    # find all list items containing the ratios
-    ratios_list = parsed.find('ul', id='top-ratios').find_all('li')
-
-    # extract the ratio name and values
-    ratios = []
-    for item in ratios_list:
-        name = item.find('span', class_='name').text.replace('\n', '').strip()  # extract the name of the ratio
-        value = item.find('span', class_='nowrap').text.replace('\n', '').replace(' ', '').replace('₹','').replace(',','').replace('.','').replace('%','').replace('Cr','').strip()  # Extract the value of the ratio
-        ratios.append((name, value))
-    # convert to a pandas dataframe
-    df = pd.DataFrame(ratios, columns=['Ratio', 'Value'])
-    return df
-
 def get_table(parsed, table_id):
     results = parsed.find('section', {'id': table_id})
     table = results.find('table', class_='data-table')
