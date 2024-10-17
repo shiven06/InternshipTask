@@ -203,10 +203,8 @@ def main():
         fy23_pe_calc = "Data not available for calculation"
     
     
-    sales_growth_df = profit_loss_additional_df[profit_loss_additional_df['Metric'].str.contains('Compounded Sales Growth')].reset_index(drop=True)
-    sales_growth_df.index=sales_growth_df.index+1
-    profit_growth_df = profit_loss_additional_df[profit_loss_additional_df['Metric'].str.contains('Compounded Profit Growth')].reset_index(drop=True)
-    profit_growth_df.index=profit_growth_df.index+1
+    sales_growth_df = profit_loss_additional_df[profit_loss_additional_df['Metric'].str.contains('Compounded Sales Growth')].reset_index()
+    profit_growth_df = profit_loss_additional_df[profit_loss_additional_df['Metric'].str.contains('Compounded Profit Growth')].reset_index()
     
     # preparing dataframes for display
     prepared_sales_growth = prepare_growth_display(profit_loss_additional_df, 'Compounded Sales Growth')
