@@ -29,7 +29,7 @@ def prepare_growth_display(df, metric_prefix):
 def find_specific_roce(df, metric_name):
     try:
         # find the row that contains the metric name (e.g., "ROCE %")
-        metric_row = df[df['Metric'].str.contains(metric_name, case=False, na=False)]
+        metric_row = df[df['Metric'].str.contains(metric_name)]
         if not metric_row.empty:
             # get the fifth last column's name
             # assuming that the last few columns are always the dates we are interested in
@@ -51,29 +51,23 @@ def get_table(parsed, table_id):
         df_rows.append(df_row)
     return pd.DataFrame(df_rows, columns=['Metric'] + headers)
 
-
 def get_profit_loss_additional(parsed):
     # find the section containing the profit & loss statement
     profit_loss_section = parsed.find('section', {'id': 'profit-loss'})
-
     tables = profit_loss_section.find_all('table', class_='ranges-table')
     # initialize list to store all data
     data = []
-
     # iterate through each table and extract data
     for table in tables:
-        # fet the header (growth type)
+        # fetch the header (growth type)
         header = table.find('th').text.strip()
-        
         # find all rows within the table
         rows = table.find_all('tr')[1:]  # skip the first header row
-        
         for row in rows:
             # get the period and the percentage values
             period = row.find_all('td')[0].text.strip()
             value = row.find_all('td')[1].text.strip()
             data.append([header, period, value])
-
     # convert to a pandas dataframe
     df = pd.DataFrame(data, columns=['Metric', 'Period', 'Value'])
 
@@ -83,7 +77,6 @@ def get_profit_loss_additional(parsed):
 def find_metric(parsed, html_tag, attribute_type, attribute_value):
     metric_tag = parsed.find(html_tag, {attribute_type: attribute_value})
     return metric_tag.text.strip() if metric_tag else 'Data not available'
-
 
 # to find 'EPS in Rs'
 def find_specific_eps(df, date):
@@ -143,10 +136,9 @@ def calculate_overvaluation(current_pe, fy23_pe, intrinsic_pe):
     overvaluation = (lower_pe / intrinsic_pe - 1) * 100
     return overvaluation
 
-# streamlit UI setup
 st.title('Valuing Consistent Compounders')
 
-# main input fields
+# main input
 symbol_input = st.text_input("Enter Company Symbol", "NESTLEIND")
 
 # sliders for DCF calculation parameters
@@ -172,6 +164,7 @@ def main():
     
     # fetch key metrics
     stock_symbol = find_metric(parsed_html, 'h1', 'class', 'h2 shrink-text')  # fetch the stock symbol
+
     current_pe = None
     pe_elements = parsed_html.find_all('li', class_='flex flex-space-between')  # find all 'li' elements once
     for li in pe_elements:
@@ -205,6 +198,7 @@ def main():
     
     sales_growth_df = profit_loss_additional_df[profit_loss_additional_df['Metric'].str.contains('Compounded Sales Growth')].reset_index()
     profit_growth_df = profit_loss_additional_df[profit_loss_additional_df['Metric'].str.contains('Compounded Profit Growth')].reset_index()
+   
     
     # preparing dataframes for display
     prepared_sales_growth = prepare_growth_display(profit_loss_additional_df, 'Compounded Sales Growth')
