@@ -1,6 +1,5 @@
-Application for Valuation of Consistent Compounds-Internship Task Submission
 
-This project has been developed from an internship task provided by Ambit IE Data to recreate a Web application that calculates the intrinsic P/E and degree of overvaluation for companies listed on NSE/BSE based on financial data scraped from the Screener website.
+This project has been developed to recreate a Web application that calculates the intrinsic P/E and degree of overvaluation for companies listed on NSE/BSE based on financial data scraped from the Screener website.
 
 ### Overview
 
@@ -75,9 +74,4 @@ The major dependencies include:
 
 Since this is my first exposure to financial data and terminologies like calculation of intrinsic value and DCF models, I found it difficult to implement correctly the intrinsic P/E and degree of overvaluation. Nevertheless, I certainly put in much effort to understand and exactly replicate the functionality as closely as possible. I would consider myself very happy to get feedback on where improvements might be required and look forward to getting to learn more about financial modeling and applying such knowledge in the time to come.
 
-### Acknowledgments
-
-- **Mr. Amit Tembhurnikar**: For his support and for providing detailed requirements of this project.
-- **Mr. Nitin Bhasin**: For offering the once-in-a-lifetime opportunity, to help build the Ambit's Institutional Equities franchise.
-
-Thanks for your time; I hope I am able to contribute a lot more in the years to come.
+Thanks for your time.
